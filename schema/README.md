@@ -2,6 +2,8 @@
 
 ER図をもとに、次の6テーブルを自分で作成してください。
 
+構文を忘れたときは、[Week 2 SQL基本構文チートシート](../docs/week2-sql-reference.md)を参照してください。
+
 ## テーブルとカラム
 
 ```text
@@ -86,4 +88,3 @@ make inspect
 表示された`nullable`、`default`、`constraint_definition`を、自分が[設計判断メモ](../notes/design-decisions.md)へ書いた内容と照合してください。
 
 `NOT NULL`、`UNIQUE`、`CHECK`、削除ルールには設計上の選択肢があります。これらは`schema/verification.sql`に、自分が意図した正常値と異常値をINSERT・DELETEして検証します。
-

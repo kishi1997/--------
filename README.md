@@ -18,11 +18,12 @@ make db-down
 
 ## Week 2: Schema・Constraints
 
-1. [課題とTips](schema/README.md)を読む
-2. `schema/schema.sql`へ6テーブルを書く
-3. `make verify`で構造を自己採点する
-4. `schema/verification.sql`へ制約の検証を書く
-5. [設計判断メモ](notes/design-decisions.md)へ理由と結果を残す
+1. [SQL基本構文チートシート](docs/week2-sql-reference.md)を手元に開く
+2. [課題とTips](schema/README.md)を読む
+3. `schema/schema.sql`へ6テーブルを書く
+4. `make verify`で構造を自己採点する
+5. `schema/verification.sql`へ制約の検証を書く
+6. [設計判断メモ](notes/design-decisions.md)へ理由と結果を残す
 
 自分で考えたあとに比較できるよう、[模範解答](solutions/README.md)も最初から用意しています。模範解答は唯一の正解ではなく、削除ルールや重複条件を含む一つの設計例です。
 
