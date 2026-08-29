@@ -57,3 +57,5 @@ make db-reset   # 学習用DBを完全初期化
 - Week 6: `app/` - Next.js、ORM、PostgreSQLの総合演習
 
 学習結果は[記録テンプレート](notes/result-template.md)を使い、推測ではなく実行結果を残します。
+
+学習中に間違えて修正した内容は、[週ごとの修正ログ](logs/README.md)へ記録します。

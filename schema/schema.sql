@@ -20,7 +20,7 @@ create table products (
     category_id integer not null,
     name text not null,
     description text not null,
-    price numeric(12, 2) not null.,
+    price numeric(12, 2) not null,
     stock integer not null,
     created_at timestamptz not null default current_timestamp,
     constraint category_product_id_fkey 
@@ -32,8 +32,10 @@ create table orders (
     id bigint generated always as  identity primary key,
     user_id bigint not null,
     total_amount numeric(12, 2) not null,
-    status text not null check(status in ('draft', 'published', 'archived')),
+    status text not null,
     created_at timestamptz not null default current_timestamp,
+    constraint orders_status_check 
+      check (status in('pending', 'paid', 'shipped', 'canceled')),
     constraint orders_user_id_fkey
       foreign key(user_id)
       references users(id)
@@ -44,6 +46,7 @@ create table order_items (
     order_id bigint not null,
     product_id bigint not null,
     unit_price numeric(12,2),
+    quantity integer not null,
     created_at timestamptz not null default current_timestamp,
     constraint order_items_orders_fkey
       foreign key (order_id)
@@ -70,17 +73,3 @@ create table reviews (
     constraint reviews_user_product_id_key
       unique(user_id, product_id)
 );
-
--- 同じユーザーの同一商品へのレビューは一度までの制約を追加する方法
-alter table reviews
-add constraint reviews_user_product_id_key
-unique (user_id, product_id)
-
--- レビューのレーティングを0 <= 5 から 1 <= 5に修正
--- １：まず制約を一回ドロップ
-alter table reviews
-drop constraint reviews_rating_check;
--- ２：新規作成
-alter table reviews
-add constraint reviews_rating_check
-check (rating between 1 and 5);
