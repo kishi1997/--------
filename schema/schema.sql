@@ -45,7 +45,7 @@ create table order_items (
     id bigint generated always as identity primary key,
     order_id bigint not null,
     product_id bigint not null,
-    unit_price numeric(12,2),
+    unit_price numeric(12,2) not null,
     quantity integer not null,
     created_at timestamptz not null default current_timestamp,
     constraint order_items_orders_fkey
