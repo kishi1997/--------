@@ -2,10 +2,10 @@
 
 `reference_schema.sql`は、今回のER図に対する一つの設計例です。唯一の正解ではありません。
 
-まず`schema/schema.sql`を自分で書いて`make verify`を実行し、その後に差分を比較してください。
+まず`week2/exercises/schema.sql`を自分で書いて`make verify`を実行し、その後に差分を比較してください。
 
 ```bash
-diff -u schema/schema.sql solutions/reference_schema.sql
+diff -u week2/exercises/schema.sql week2/solutions/reference-schema.sql
 ```
 
 模範解答を実際に作成し、共通の構造テストへ通す場合は次を実行します。
@@ -25,4 +25,3 @@ make reference
 - 注文を削除した場合、単独では意味を持たない注文明細も削除する
 - レビューはユーザー・商品と強く結び付くため、親の削除に追従する
 - 外部キーIndexはWeek 3の比較実験で追加する
-

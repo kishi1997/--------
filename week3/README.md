@@ -14,7 +14,7 @@
 
 ## はじめ方
 
-構文を確認するときは、[Week 3 Indexチートシート](../docs/week3-index-reference.md)を開いてください。
+最初に[Week 3導入インフォグラフィック](docs/week3-onboarding-infographic.png)と[Week 3 Indexチートシート](docs/week3-index-reference.md)を開いてください。
 
 PostgreSQLを起動し、専用テーブルへ100万件を作成します。
 
@@ -35,13 +35,13 @@ make week3-check
 
 課題ファイルを番号順に進めます。
 
-1. [B-Treeと単一カラムIndex](01-btree.sql)
-2. [Selectivity](02-selectivity.sql)
-3. [Composite Indexとカラム順](03-composite.sql)
-4. [Partial Index](04-partial.sql)
-5. [Covering Index](05-covering.sql)
+1. [B-Treeと単一カラムIndex](exercises/01-btree.sql)
+2. [Selectivity](exercises/02-selectivity.sql)
+3. [Composite Indexとカラム順](exercises/03-composite.sql)
+4. [Partial Index](exercises/04-partial.sql)
+5. [Covering Index](exercises/05-covering.sql)
 
-各ファイルの`TODO`へSQLと予想を書き、実行結果を[results.md](results.md)へ記録します。
+各ファイルの`TODO`へSQLと予想を書き、実行結果を[実測結果](notes/results.md)へ記録します。
 
 課題ファイルを編集してから、対応するコマンドで実行します。
 
@@ -84,4 +84,4 @@ make week3-setup
 
 ## 模範解答
 
-自分で試したあと、[Week 3模範解答](../solutions/week3/README.md)と比較してください。実行時間はPC、キャッシュ、PostgreSQLの判断によって変わるため、模範解答と同じ数字になる必要はありません。
+自分で試したあと、[Week 3模範解答](solutions/README.md)と比較してください。実行時間はPC、キャッシュ、PostgreSQLの判断によって変わるため、模範解答と同じ数字になる必要はありません。

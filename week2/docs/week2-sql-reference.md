@@ -269,7 +269,7 @@ rollback;
 \dt                 テーブル一覧
 \d users            usersのカラムと制約
 \d+ users           より詳しい情報
-\i schema/schema.sql SQLファイルを実行
+\i week2/exercises/schema.sql SQLファイルを実行
 \q                  psqlを終了
 ```
 
@@ -315,4 +315,3 @@ ERROR: violates check constraint
 ```
 
 INSERTした値と`CHECK (...)`の条件を確認します。
-
