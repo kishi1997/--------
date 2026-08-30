@@ -10,6 +10,8 @@ where email = 'user750000@example.com';
 
 -- TODO 2: emailにB-Tree Indexを作る。
 -- create indexの構文は自分で書く。
+create index index_lab_users_email_idx
+on index_lab_users(email);
 
 -- TODO 3: 同じEXPLAIN ANALYZEを再実行する。
 -- Index Scanになったか、時間とBuffersがどう変わったかを記録する。
