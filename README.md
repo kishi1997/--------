@@ -56,6 +56,15 @@ make db-reset   # 学習用DBを完全初期化
 - Week 5: `transactions/` - Transaction、Lock、Concurrency
 - Week 6: `app/` - Next.js、ORM、PostgreSQLの総合演習
 
+## Week 3: Index・Query Performance
+
+[Week 3課題](indexes/README.md)では、専用テーブルへ100万件を作り、`EXPLAIN (ANALYZE, BUFFERS)`でIndex追加前後を比較します。
+
+```bash
+make week3-setup
+make week3-check
+```
+
 学習結果は[記録テンプレート](notes/result-template.md)を使い、推測ではなく実行結果を残します。
 
 学習中に間違えて修正した内容は、[週ごとの修正ログ](logs/README.md)へ記録します。

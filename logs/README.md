@@ -5,6 +5,7 @@
 ## ログ一覧
 
 - [Week 2: CREATE TABLE・制約](week-02.md)
+- [Week 3: Index・Query Performance](week-03.md)
 
 ## 追記テンプレート
 
@@ -27,4 +28,3 @@
 
 次に同じ状況になったときの判断基準を書く。
 ```
-
