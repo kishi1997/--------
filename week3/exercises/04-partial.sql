@@ -2,10 +2,13 @@
 -- pending行だけを対象にする小さなIndexを検討する。
 
 -- TODO 1: 全statusを含む複合Indexのサイズを確認する。
-
+create index index_lab_users_status_created_at_idx
+on index_lab_users (status, created_at);
 -- TODO 2: pendingだけを含むPartial Indexを作る。
 -- created_atをIndex対象にし、WHERE status = 'pending'をIndex定義へ付ける。
-
+create index index_lab_users_pending_created_at_idx
+on index_lab_users (created_at)
+where status = 'pending';
 -- TODO 3: 次のクエリでPartial Indexが使われるか確認する。
 explain (analyze, buffers)
 select id, status, created_at
