@@ -1,8 +1,10 @@
-.PHONY: help db-up db-down db-reset psql apply seed verify inspect example reference week3-setup week3-check week3-reset-indexes week3-1 week3-2 week3-3 week3-4 week3-5
+.PHONY: help db-up db-down db-reset psql apply seed verify inspect example reference week3-setup week3-check week3-reset-indexes week3-1 week3-2 week3-3 week3-4 week3-5 week4-setup week4-check week4-1 week4-2 week4-3 week4-reference
 
 WEEK2 := week2
 WEEK3 := week3
+WEEK4 := week4
 PSQL := docker compose exec -T postgres sh -c 'psql -v ON_ERROR_STOP=1 -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"'
+NODE_RUN := set -a; if [ -f .env ]; then . ./.env; fi; set +a; node
 
 help:
 	@echo "make db-up     PostgreSQLを起動"
@@ -19,6 +21,12 @@ help:
 	@echo "make week3-check         Week 3の準備状態を確認"
 	@echo "make week3-reset-indexes Week 3で作ったIndexを削除"
 	@echo "make week3-1〜week3-5   各課題SQLを実行"
+	@echo "make week4-setup         N+1実験用データを作成"
+	@echo "make week4-check         Week 4の準備状態を確認"
+	@echo "make week4-1             N+1実装を実行"
+	@echo "make week4-2             JOIN課題を実行"
+	@echo "make week4-3             Batching課題を実行"
+	@echo "make week4-reference     3パターンの模範実装を比較"
 
 db-up:
 	docker compose up -d --wait
@@ -85,3 +93,23 @@ week3-4:
 
 week3-5:
 	$(PSQL) < $(WEEK3)/exercises/05-covering.sql
+
+week4-setup:
+	@echo "注意: n1_usersとn1_postsを削除し、実験データで作り直します"
+	$(PSQL) < $(WEEK4)/exercises/setup.sql
+	$(MAKE) week4-check
+
+week4-check:
+	$(PSQL) < $(WEEK4)/tests/verify-setup.sql
+
+week4-1:
+	@$(NODE_RUN) $(WEEK4)/exercises/01-n-plus-one.js
+
+week4-2:
+	@$(NODE_RUN) $(WEEK4)/exercises/02-join.js
+
+week4-3:
+	@$(NODE_RUN) $(WEEK4)/exercises/03-batching.js
+
+week4-reference:
+	@$(NODE_RUN) $(WEEK4)/solutions/reference.js

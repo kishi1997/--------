@@ -1,0 +1,12 @@
+{
+  "name": "database-learning",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PostgreSQL hands-on learning exercises",
+  "scripts": {
+    "check:week4": "node --check week4/lib/database.js && node --check week4/lib/report.js && node --check week4/exercises/01-n-plus-one.js && node --check week4/exercises/02-join.js && node --check week4/exercises/03-batching.js && node --check week4/solutions/reference.js"
+  },
+  "dependencies": {
+    "pg": "^8.16.3"
+  }
+}

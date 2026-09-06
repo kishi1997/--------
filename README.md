@@ -80,3 +80,13 @@ make week3-check
 ```
 
 学習結果は[記録テンプレート](week3/notes/result-template.md)を使い、推測ではなく実行結果を残します。修正ログも各Weekの`notes/corrections.md`に記録します。
+
+## Week 4: N+1・JOIN・Batching
+
+[Week 4課題](week4/README.md)では、Node.jsから発行するSQL数を計測し、N+1をJOINとBatchingで改善します。
+
+```bash
+npm install
+make week4-setup
+make week4-1
+```
