@@ -4,7 +4,11 @@ const { printReport } = require("../lib/report");
 
 // TODO: user_idの配列を使い、必要な投稿を1回でまとめて取得する。
 // 返すカラム: id, user_id, title, published_at
-const POSTS_SQL = "";
+const POSTS_SQL = `
+select n.id, n.user_id, n.title, n.published_at from n1_posts as n
+where user_id = any($1::bigint[]);
+`;
+// この $1 は金額ではなく、「JavaScriptから渡された1番目の値を、ここで使う」
 
 async function main() {
   if (!POSTS_SQL.trim()) {

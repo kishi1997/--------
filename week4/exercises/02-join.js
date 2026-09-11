@@ -5,7 +5,24 @@ const { printReport } = require("../lib/report");
 // TODO: n1_usersとn1_postsをLEFT JOINし、20人分を1回のSQLで取得する。
 // ヒント: 先にLIMIT 20したユーザーをWITH句で作る。
 // 必要な別名: user_id, user_name, user_email, post_id, post_title, published_at
-const JOIN_SQL = "";
+const JOIN_SQL = `
+with selected_users as (
+    select id, name, email
+    from n1_users
+    order by id
+    limit 20
+)
+select
+    u.id as user_id,
+    u.name as user_name,
+    u.email as user_email,
+    p.id as post_id,
+    p.title as post_title,
+    p.published_at
+  from selected_users as u
+left join n1_posts p on p.user_id = u.id
+order by u.id, p.id
+`;
 
 function groupRows(rows) {
   const users = new Map();

@@ -83,6 +83,8 @@ JOIN      1回。親データが子の数だけ重複する
 Batching  2回。親と子を別々にまとめて取得する
 ```
 
+![JOINとBatchingの判断ガイド](docs/join-vs-batching-decision-guide.png)
+
 構文や考え方は[N+1チートシート](docs/n-plus-one-reference.md)を参照してください。
 
 ## 模範解答
