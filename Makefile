@@ -1,4 +1,4 @@
-.PHONY: help db-up db-down db-reset psql apply seed verify inspect example reference week3-setup week3-check week3-reset-indexes week3-1 week3-2 week3-3 week3-4 week3-5 week4-setup week4-check week4-1 week4-2 week4-3 week4-reference week5-setup week5-check week5-1
+.PHONY: help db-up db-down db-reset psql apply seed verify inspect example reference week3-setup week3-check week3-reset-indexes week3-1 week3-2 week3-3 week3-4 week3-5 week4-setup week4-check week4-1 week4-2 week4-3 week4-reference week5-setup week5-check week5-1 week5-5
 
 WEEK2 := week2
 WEEK3 := week3
@@ -31,6 +31,7 @@ help:
 	@echo "make week5-setup         Transaction実験用データを作成"
 	@echo "make week5-check         Week 5の準備状態を確認"
 	@echo "make week5-1             COMMITとROLLBACKを実行"
+	@echo "make week5-5             ACID確認課題を実行"
 
 db-up:
 	docker compose up -d --wait
@@ -128,3 +129,6 @@ week5-check:
 
 week5-1:
 	$(PSQL) < $(WEEK5)/exercises/01-transaction.sql
+
+week5-5:
+	$(PSQL) < $(WEEK5)/exercises/05-acid.sql

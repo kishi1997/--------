@@ -8,6 +8,8 @@
 - 同時更新でLost Updateが起きる理由を説明できる
 - `SELECT ... FOR UPDATE`で更新対象を守れる
 - Isolation Levelによって見えるデータが変わることを確認できる
+- ACIDの4特性を実際の処理と結び付けて説明できる
+- 最後の1個へ同時注文が来ても、1件だけ成功させられる
 
 ## 最初に見る図解
 
@@ -60,6 +62,37 @@ make week5-1
 `READ COMMITTED`と`REPEATABLE READ`で、同じTransaction内の再読結果がどう変わるか比較します。
 
 [課題手順](exercises/04-isolation-level.md)
+
+### 5. ACIDを処理と結び付ける
+
+![ACID](docs/05-acid.png)
+
+送金・在庫・注文を例に、Atomicity・Consistency・Isolation・Durabilityが何を守るか確認します。
+
+```bash
+make week5-5
+```
+
+Durabilityは、`week5-5`のCOMMIT後にDBを再起動して確認します。`db-down`ではDocker volumeを削除しません。
+
+```bash
+make db-down
+make db-up
+make psql
+```
+
+```sql
+select * from tx_products;
+select * from tx_orders;
+```
+
+### 6. 最後の1個を2人が同時購入する
+
+![最後の1個の同時購入](docs/06-last-item.png)
+
+条件付き`UPDATE`を2接続から実行し、在庫1個に対して注文が1件だけ成功することを確認します。
+
+[課題手順](exercises/06-last-item.md)
 
 ## 記録
 
