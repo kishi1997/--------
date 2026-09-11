@@ -9,6 +9,12 @@
 - `SELECT ... FOR UPDATE`で更新対象を守れる
 - Isolation Levelによって見えるデータが変わることを確認できる
 
+## 最初に見る図解
+
+![TransactionとSnapshot](docs/transaction-and-snapshot.png)
+
+Transactionは処理を囲む範囲、Snapshotはその範囲から見えるデータの状態です。
+
 ## はじめ方
 
 ```bash
