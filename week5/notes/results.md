@@ -118,22 +118,22 @@ REPEATABLE READで値が変わらなかった理由：Transaction内で最初に
 ## 課題5：ACID
 
 ```text
-Atomicityが守ったこと：
-Consistencyが守ったこと：
-Isolationが守ったこと：
-Durabilityが守ったこと：
-CHECK制約が拒否した更新：
-COMMIT後に残ったデータ：
+Atomicityが守ったこと：変更の確定と取り消しを行えること
+Consistencyが守ったこと：DBのルールを守らせること
+Isolationが守ったこと：同時処理による変更の矛盾を起こさせない
+Durabilityが守ったこと：変更後のデータの永続化
+CHECK制約が拒否した更新：stockがマイナスになる更新
+COMMIT後に残ったデータ：購入者Aのみによる購入履歴
 ```
 
 ## 課題6：最後の1個
 
 ```text
-AのUPDATE結果（更新行数）：
-BのUPDATE結果（更新行数）：
-最終在庫数：
-作成された注文数：
-2人とも購入成功にならなかった理由：
+AのUPDATE結果（更新行数）：1
+BのUPDATE結果（更新行数）：0
+最終在庫数：0
+作成された注文数：1
+2人とも購入成功にならなかった理由：Bの注文はAの後に実行されるためstock 0を下回る注文は拒否される
 ```
 
 ## Week 5総まとめ
