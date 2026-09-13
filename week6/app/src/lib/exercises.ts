@@ -12,19 +12,15 @@ export type OrderWithItems = Prisma.OrderGetPayload<{
 }>;
 
 export async function getProducts() {
-  try {
-    const products = await prisma.product.findMany({
-      where: {
-        active: true,
-        stock: { gt: 0 },
+  return prisma.product.findMany({
+    where: {
+      active: true,
+      stock: {
+        gt: 0,
       },
-      orderBy: { price: "asc" },
-    });
-    return products;
-  } catch (error) {
-    // TODO 1: activeかつstock > 0の商品を、price昇順で取得する。
-    throw new Error(`"TODO 1: getProductsを実装してください", ${error}`);
-  }
+    },
+    orderBy: [{ price: "asc" }, { id: "asc" }],
+  });
 }
 
 export async function getProductPage(
