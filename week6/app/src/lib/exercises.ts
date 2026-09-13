@@ -57,6 +57,7 @@ export async function getOrdersWithItems(): Promise<OrderWithItems[]> {
     orderBy: { id: "asc" },
     include: {
       items: {
+        orderBy: { id: "asc" },
         include: {
           product: true,
         },
