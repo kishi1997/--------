@@ -31,13 +31,16 @@ export async function getProductPage(
     active: true,
     stock: { gt: 0 },
   };
+  // 変更内容：ページ数が不数にならないように最低ページ数が1になるように設定
+  // 理由：skipに負数が渡されるとエラーが起きるため
+  const safePage = Math.max(1, page);
   const total = await prisma.product.count({
     where,
   });
   const totalPages = Math.ceil(total / pageSize);
   const products = await prisma.product.findMany({
     where,
-    skip: (page - 1) * pageSize,
+    skip: (safePage - 1) * pageSize,
     take: pageSize,
     orderBy: { id: "asc" },
   });
