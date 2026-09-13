@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Product {
+  id        BigInt      @id @default(autoincrement())
+  name      String
+  price     Int
+  stock     Int
+  active    Boolean     @default(true)
+  createdAt DateTime    @default(now()) @map("created_at")
+  items     OrderItem[]
+
+  @@map("w6_products")
+}
+
+model Order {
+  id           BigInt      @id @default(autoincrement())
+  customerName String      @map("customer_name")
+  createdAt    DateTime    @default(now()) @map("created_at")
+  items        OrderItem[]
+
+  @@map("w6_orders")
+}
+
+model OrderItem {
+  id        BigInt  @id @default(autoincrement())
+  orderId   BigInt  @map("order_id")
+  productId BigInt  @map("product_id")
+  quantity  Int
+  unitPrice Int     @map("unit_price")
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id])
+
+  @@index([orderId])
+  @@index([productId])
+  @@map("w6_order_items")
+}
