@@ -27,6 +27,21 @@ export async function getProductPage(
   page: number,
   pageSize = 6,
 ): Promise<ProductPageResult> {
+  const where = {
+    active: true,
+    stock: { gt: 0 },
+  };
+  const total = await prisma.product.count({
+    where,
+  });
+  const totalPages = Math.ceil(total / pageSize);
+  const products = await prisma.product.findMany({
+    where,
+    skip: (page - 1) * pageSize,
+    take: pageSize,
+    orderBy: { id: "asc" },
+  });
+  return { products, total, totalPages };
   // TODO 2: pageからskipを計算し、商品と総件数を返す。
   void page;
   void pageSize;
