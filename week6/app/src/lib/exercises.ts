@@ -53,6 +53,17 @@ export async function getProductPage(
 
 export async function getOrdersWithItems(): Promise<OrderWithItems[]> {
   // TODO 3: Order → items → productをincludeし、N+1を避ける。
+  const ordersWithItems = await prisma.order.findMany({
+    orderBy: { id: "asc" },
+    include: {
+      items: {
+        include: {
+          product: true,
+        },
+      },
+    },
+  });
+  return ordersWithItems;
   throw new Error("TODO 3: getOrdersWithItemsを実装してください");
 }
 
