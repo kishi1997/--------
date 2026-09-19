@@ -65,27 +65,84 @@ export async function getOrdersWithItems(): Promise<OrderWithItems[]> {
     },
   });
   return ordersWithItems;
-  throw new Error("TODO 3: getOrdersWithItemsを実装してください");
 }
 
 export async function searchProducts(keyword: string): Promise<Product[]> {
+  const normalizedKeyword = keyword.trim();
+  if (!normalizedKeyword) return [];
   // TODO 4: nameにkeywordを含む商品を検索する。
-  void keyword;
-  throw new Error("TODO 4: searchProductsを実装してください");
+  return prisma.product.findMany({
+    where: {
+      name: {
+        contains: normalizedKeyword,
+        mode: "insensitive",
+      },
+      active: true,
+      stock: { gt: 0 },
+    },
+    orderBy: { id: "asc" },
+  });
 }
 
 export async function purchaseProduct(
   productId: bigint,
   customerName: string,
 ): Promise<unknown> {
+  return prisma.$transaction(async (tx) => {
+    const result = await tx.product.updateMany({
+      where: {
+        id: productId,
+        active: true,
+        stock: {
+          gt: 0,
+        },
+      },
+      data: {
+        stock: {
+          decrement: 1,
+        },
+      },
+    });
+    console.log("===== 在庫更新結果 =====", result);
+    if (result.count === 0)
+      throw new Error("お探しの商品が存在しないか、在庫切れです");
+    const product = await tx.product.findUniqueOrThrow({
+      where: {
+        id: productId,
+      },
+      select: {
+        id: true,
+        price: true,
+        name: true,
+      },
+    });
+    const createOrder = await tx.order.create({
+      data: {
+        customerName,
+        items: {
+          create: {
+            productId,
+            quantity: 1,
+            unitPrice: product.price,
+          },
+        },
+      },
+      include: {
+        items: {
+          include: {
+            product: true,
+          },
+        },
+      },
+    });
+    console.log("===== 注文作成結果 =====");
+    console.log(createOrder);
+    return createOrder;
+  });
   // TODO 5:
   // 1. prisma.$transactionを開始する。
   // 2. updateManyでid、active、stock > 0を条件にstockを1減らす。
   // 3. countが0なら在庫切れとしてthrowする。
   // 4. 商品価格を取得する。
   // 5. OrderとOrderItemを作成して返す。
-  void prisma;
-  void productId;
-  void customerName;
-  throw new Error("TODO 5: purchaseProductを実装してください");
 }
